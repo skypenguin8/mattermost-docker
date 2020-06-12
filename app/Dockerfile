@@ -33,6 +33,17 @@ RUN mkdir -p /mattermost/data /mattermost/plugins /mattermost/client/plugins \
       else curl https://releases.mattermost.com/$MM_VERSION/mattermost-$MM_VERSION-linux-amd64.tar.gz?src=docker-app | tar -xvz ; fi \
     && cp /mattermost/config/config.json /config.json.save \
     && rm -rf /mattermost/config/config.json \
+
+# re-build
+#
+#WORKDIR /mattermost
+#COPY build/client.tar.gz client.tar.gz
+#RUN rm -rf client && tar -xvzf client.tar.gz && mkdir -p client/plugins
+#RUN rm -rf client.tar.gz
+#WORKDIR /
+#
+
+# RUN
     && addgroup -g ${PGID} mattermost \
     && adduser -D -u ${PUID} -G mattermost -h /mattermost -D mattermost \
     && chown -R mattermost:mattermost /mattermost /config.json.save /mattermost/plugins /mattermost/client/plugins \
