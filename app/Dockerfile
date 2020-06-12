@@ -43,6 +43,11 @@ RUN rm -rf client.tar.gz
 WORKDIR /
 #
 
+# server modify
+#WORKDIR /mattermost
+#COPY server/mattermost bin/mattermost
+#COPY server/platform bin/platform
+
 RUN addgroup -g ${PGID} mattermost \
     && adduser -D -u ${PUID} -G mattermost -h /mattermost -D mattermost \
     && chown -R mattermost:mattermost /mattermost /config.json.save /mattermost/plugins /mattermost/client/plugins \
