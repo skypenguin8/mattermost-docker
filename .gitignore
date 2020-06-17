@@ -7,6 +7,3 @@
 # Generated data
 volumes
 /.idea/
-
-app/build
-app/server
