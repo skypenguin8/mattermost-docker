@@ -7,3 +7,5 @@
 # Generated data
 volumes
 /.idea/
+
+app/server/mattermost
