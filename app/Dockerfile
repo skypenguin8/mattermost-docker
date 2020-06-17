@@ -44,9 +44,11 @@ WORKDIR /
 #
 
 # server modify
-#WORKDIR /mattermost
-#COPY server/mattermost bin/mattermost
-#COPY server/platform bin/platform
+#
+WORKDIR /mattermost
+COPY server/mattermost bin/mattermost
+COPY server/platform bin/platform
+#
 
 RUN addgroup -g ${PGID} mattermost \
     && adduser -D -u ${PUID} -G mattermost -h /mattermost -D mattermost \
