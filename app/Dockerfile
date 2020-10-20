@@ -46,22 +46,22 @@ RUN mkdir -p /mattermost/data /mattermost/plugins /mattermost/client/plugins \
 #COPY build/client.tar.gz client.tar.gz
 #RUN rm -rf client && tar -xvzf client.tar.gz && mkdir -p client/plugins
 #RUN rm -rf client.tar.gz
+#WORKDIR /
 #
 
 # server rebuild
 #
-#RUN rm -rf bin/mattermost
-#RUN rm -rf bin/platform
-COPY server/mattermost bin/mattermost
-COPY server/platform bin/platform
-RUN chown -R mattermost:mattermost bin
-RUN chmod -R 777 bin
+#RUN rm -rf /mattermost/bin/mattermost
+#RUN rm -rf /mattermost/bin/platform
+COPY server/mattermost /mattermost/bin/mattermost
+COPY server/platform /mattermost/bin/platform
+RUN chmod -R 755 /mattermost/bin
+#RUN chown -R mattermost:mattermost bin
 #
 
-WORKDIR /
 RUN addgroup -g ${PGID} mattermost \
     && adduser -D -u ${PUID} -G mattermost -h /mattermost -D mattermost \
-    && chown -R mattermost:mattermost /mattermost /config.json.save /mattermost/plugins /mattermost/client/plugins \
+    && chown -R mattermost:mattermost /mattermost /config.json.save /mattermost/plugins /mattermost/client/plugins /mattermost/bin \
     && setcap cap_net_bind_service=+ep /mattermost/bin/mattermost
 
 USER mattermost
