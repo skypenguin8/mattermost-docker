@@ -25,6 +25,7 @@ services:
       # set same as db credentials and dbname
       - MM_USERNAME=mmuser
       - MM_PASSWORD=mmuser1q2w!
+#      - MM_DBNAME=mattermost_live
       - MM_DBNAME=mattermost_dev
 
       # use the credentials you've set above, in the format:
