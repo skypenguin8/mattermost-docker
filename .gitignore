@@ -9,3 +9,5 @@ volumes
 /.idea/
 
 app/server/mattermost
+/app/build/
+/app/server/
