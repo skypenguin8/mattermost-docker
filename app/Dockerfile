@@ -46,14 +46,14 @@ WORKDIR /mattermost
 COPY build/client.tar.gz client.tar.gz
 RUN rm -rf client && tar -xvzf client.tar.gz && mkdir -p client/plugins
 RUN rm -rf client.tar.gz
-WORKDIR /
 #
 
 # server rebuild
 #
-#WORKDIR /mattermost
-#COPY server/mattermost bin/mattermost
-#COPY server/platform bin/platform
+COPY server/mattermost bin/mattermost
+COPY server/platform bin/platform
+
+WORKDIR /
 #
 
 RUN addgroup -g ${PGID} mattermost \
