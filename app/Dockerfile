@@ -33,28 +33,28 @@ RUN mkdir -p /mattermost/data /mattermost/plugins /mattermost/client/plugins \
 		elif [ "$edition" = "team" ] ; then curl https://releases.mattermost.com/$MM_VERSION/mattermost-team-$MM_VERSION-linux-amd64.tar.gz?src=docker-app | tar -xvz ; \
 		else curl https://releases.mattermost.com/$MM_VERSION/mattermost-$MM_VERSION-linux-amd64.tar.gz?src=docker-app | tar -xvz ; fi \
 	&& cp /mattermost/config/config.json /config.json.save \
-#	&& rm -rf /mattermost/config/config.json
-	&& rm -rf /mattermost/config/config.json \
-	&& addgroup -g ${PGID} mattermost \
-	&& adduser -D -u ${PUID} -G mattermost -h /mattermost -D mattermost \
-	&& chown -R mattermost:mattermost /mattermost /config.json.save /mattermost/plugins /mattermost/client/plugins \
-	&& setcap cap_net_bind_service=+ep /mattermost/bin/mattermost
+	&& rm -rf /mattermost/config/config.json
+#	&& rm -rf /mattermost/config/config.json \
+#	&& addgroup -g ${PGID} mattermost \
+#	&& adduser -D -u ${PUID} -G mattermost -h /mattermost -D mattermost \
+#	&& chown -R mattermost:mattermost /mattermost /config.json.save /mattermost/plugins /mattermost/client/plugins \
+#	&& setcap cap_net_bind_service=+ep /mattermost/bin/mattermost
 
 # front-rebuild
-#WORKDIR /mattermost
-#COPY build/client.tar.gz client.tar.gz
-#RUN rm -rf client && tar -xvzf client.tar.gz && mkdir -p client/plugins
-#RUN rm -rf client.tar.gz
-#WORKDIR /
+WORKDIR /mattermost
+COPY build/client.tar.gz client.tar.gz
+RUN rm -rf client && tar -xvzf client.tar.gz && mkdir -p client/plugins
+RUN rm -rf client.tar.gz
+WORKDIR /
 
 # server rebuild
 #COPY server/mattermost /mattermost/bin/mattermost
 #COPY server/platform /mattermost/bin/platform
-#
-#RUN addgroup -g ${PGID} mattermost \
-#    && adduser -D -u ${PUID} -G mattermost -h /mattermost -D mattermost \
-#    && chown -R mattermost:mattermost /mattermost /config.json.save /mattermost/plugins /mattermost/client/plugins \
-#    && setcap cap_net_bind_service=+ep /mattermost/bin/mattermost
+
+RUN addgroup -g ${PGID} mattermost \
+    && adduser -D -u ${PUID} -G mattermost -h /mattermost -D mattermost \
+    && chown -R mattermost:mattermost /mattermost /config.json.save /mattermost/plugins /mattermost/client/plugins \
+    && setcap cap_net_bind_service=+ep /mattermost/bin/mattermost
 
 USER mattermost
 
