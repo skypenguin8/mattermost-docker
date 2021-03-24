@@ -41,15 +41,15 @@ RUN mkdir -p /mattermost/data /mattermost/plugins /mattermost/client/plugins \
 #	&& setcap cap_net_bind_service=+ep /mattermost/bin/mattermost
 
 # front-rebuild
-WORKDIR /mattermost
-COPY build/client.tar.gz client.tar.gz
-RUN rm -rf client && tar -xvzf client.tar.gz && mkdir -p client/plugins
-RUN rm -rf client.tar.gz
-WORKDIR /
+#WORKDIR /mattermost
+#COPY build/client.tar.gz client.tar.gz
+#RUN rm -rf client && tar -xvzf client.tar.gz && mkdir -p client/plugins
+#RUN rm -rf client.tar.gz
+#WORKDIR /
 
 # server rebuild
-#COPY server/mattermost /mattermost/bin/mattermost
-#COPY server/platform /mattermost/bin/platform
+COPY server/mattermost /mattermost/bin/mattermost
+COPY server/platform /mattermost/bin/platform
 
 RUN addgroup -g ${PGID} mattermost \
     && adduser -D -u ${PUID} -G mattermost -h /mattermost -D mattermost \
