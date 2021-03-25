@@ -8,8 +8,8 @@ ENV MM_INSTALL_TYPE=docker
 ARG edition=team
 ARG PUID=2000
 ARG PGID=2000
-ARG MM_BINARY=https://img_local_live.ilscp.net/mattermost/mattermost-team-linux-amd64.tar.gz
-#ARG MM_BINARY=
+#ARG MM_BINARY=https://img_local_live.ilscp.net/mattermost/mattermost-team-linux-amd64.tar.gz
+ARG MM_BINARY=
 ARG MM_VERSION=5.31.0
 
 
