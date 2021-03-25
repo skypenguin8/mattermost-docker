@@ -37,7 +37,7 @@ RUN mkdir -p /mattermost/data /mattermost/plugins /mattermost/client/plugins \
 	&& rm -rf /mattermost/config/config.json \
 	&& addgroup -g ${PGID} mattermost \
 	&& adduser -D -u ${PUID} -G mattermost -h /mattermost -D mattermost \
-	&& chown -R mattermost:mattermost /mattermost /config.json.save /mattermost/plugins /mattermost/client/plugins /entrypoint.sh \
+	&& chown -R mattermost:mattermost /mattermost /config.json.save /mattermost/plugins /mattermost/client/plugins \
 	&& setcap cap_net_bind_service=+ep /mattermost/bin/mattermost
 
 USER mattermost
@@ -47,6 +47,7 @@ HEALTHCHECK CMD curl --fail http://localhost:8000 || exit 1
 
 # Configure entrypoint and command
 COPY entrypoint.sh /
+RUN chown -R mattermost:mattermost /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 WORKDIR /mattermost
 CMD ["mattermost"]
