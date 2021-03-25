@@ -69,7 +69,7 @@ WORKDIR /mattermost
 CMD ["mattermost"]
 
 # Expose port 8000 of the container
-EXPOSE 8000
+EXPOSE 8000 8067 8074 8075
 
 # Declare volumes for mount point directories
 VOLUME ["/mattermost/data", "/mattermost/logs", "/mattermost/config", "/mattermost/plugins", "/mattermost/client/plugins"]
