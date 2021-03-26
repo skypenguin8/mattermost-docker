@@ -39,7 +39,7 @@ RUN mkdir -p /mattermost/data /mattermost/plugins /mattermost/client/plugins \
 	&& addgroup -g ${PGID} mattermost \
 	&& adduser -D -u ${PUID} -G mattermost -h /mattermost -D mattermost \
 	&& chown -R mattermost:mattermost /mattermost /config.json.save /mattermost/plugins /mattermost/client/plugins \
-	&& chmod -R 755 /mattermost
+	&& chmod -R g+w /mattermost
 	&& setcap cap_net_bind_service=+ep /mattermost/bin/mattermost
 
 # front-rebuild
